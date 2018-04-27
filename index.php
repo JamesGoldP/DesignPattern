@@ -4,18 +4,40 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-$config = array (
-	'default' => array (
-		'hostname' => '127.0.0.1',
-		'database' => 'mycms',
-		'username' => 'root',
-		'password' => 'pyl',
-	),
-);
+class Page{
 
-$db = new Core\Database\MySqli();
-$link = $db->connect($config['default']);
-$mysqli_result = $db->query('show databases');
-$result = mysqli_fetch_array($mysqli_result, MYSQLI_ASSOC);
-print_r($result);
-$db->close();
+	public $strategy;  //策略类型
+
+	public function index()
+	{
+	 	echo 'AD'.'<br/>';
+	 	$this->strategy->showAD();
+	 	echo '<br/>';
+
+	 	echo 'Cateogry'.'<br/>';
+	 	$this->strategy->showCategory();
+	 	echo '<br/>';
+
+	 	echo 'posid'.'<br/>';
+	 	$this->strategy->showPosid();	
+	}
+
+	public function setStrategy($strategy)
+	{
+		$this->strategy = $strategy;
+	}
+
+}
+
+
+$data = new Page();
+$sex = isset($_GET['sex']) ? trim($_GET['sex']) : '';
+if( $sex =='female' ){
+	$strategy = new Core\FemaleUserStrategy();
+} elseif( $sex == 'vip' ){
+	$strategy = new Core\vipUserStrategy();
+} else {
+	$strategy = new Core\MaleUserStrategy();
+}
+$data->setStrategy($strategy);
+$data->index();

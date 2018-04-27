@@ -15,8 +15,6 @@
 传统模式：每个类都需要去new一下，当类名和参数改变时就需要每个地方进行修改。
 工厂模式：当类名和参数改变时只需要去工厂类里面改变。
 
-
-
 ## 单例模式
 
 传统模式：某个类new之后都是一个新的对象。
@@ -55,3 +53,119 @@ var_dump($db3);
 
 ## 注册树模式
 结合工厂模式和单例模式，初始化的时候将需要的类放到全局树中，然后每次用到直接去取就行，不用在用工厂模式和单例模式去new。
+
+## 适配器模式
+像将mysql,mysqli,pdo3种可以用适配器模式统一成一致，类似的场景还有caches适配器，将memcache,redis,file,apc等不同的缓存函数，统一成一致。
+
+## 策略模式
+#### 定义
+将一组特定的行为和算法封装成类，以适应特定的上下文环境，这种模式就是策略模式
+
+#### 实际应用举例
+
+假如一个电商网站系统，针对男性女性用户要各自跳转到不同的商品类目，并且所有广告位展示不同的广告。
+
+假设需要增加一个推荐位，之后再要求增加一个vip策略
+
+传统模式：
+
+```php
+
+class Page{
+
+	public $strategy;  //策略类型
+
+	public function index()
+	{
+		$femaleClass = new Core\FemaleUserStrategy();
+		$maleClass = new Core\maleUserStrategy();
+		$vipClass = new Core\vipUserStrategy();
+		
+		echo 'AD'.'<br/>';
+	 	$sex = isset($_GET['sex']) ? trim($_GET['sex']) : '';
+		if( $sex =='female' ){		
+			$femaleClass->showAD();
+		} else if( $sex == 'vip' ){
+			$vipClass->showAD();
+		} else {
+			$maleClass->showAD();
+		}
+
+		echo '<br/>';
+		echo 'Cateogry'.'<br/>';
+		if( $sex =='female' ){		
+			$femaleClass->showCategory();
+		} else if( $sex == 'vip' ){
+			$vipClass->showCategory();
+		} else {
+			$maleClass->showCategory();
+		}
+
+		echo 'posid'.'<br/>';
+		if( $sex =='female' ){		
+			$femaleClass->showPosid();
+		} else if( $sex == 'vip' ){
+			$vipClass->showPosid();
+		} else {
+			$maleClass->showPosid();
+		}
+
+
+	}
+
+
+}
+
+
+$data = new Page();
+$sex = isset($_GET['sex']) ? trim($_GET['sex']) : '';
+$data->index();
+```
+
+如果使用策略模式的话
+
+```php
+class Page{
+
+	public $strategy;  //策略类型
+
+	public function index()
+	{
+	 	echo 'AD'.'<br/>';
+	 	$this->strategy->showAD();
+	 	echo '<br/>';
+
+	 	echo 'Cateogry'.'<br/>';
+	 	$this->strategy->showCategory();
+	 	echo '<br/>';
+
+	 	echo 'posid'.'<br/>';
+	 	$this->strategy->showPosid();	
+	}
+
+	public function setStrategy($strategy)
+	{
+		$this->strategy = $strategy;
+	}
+
+}
+
+
+$data = new Page();
+$sex = isset($_GET['sex']) ? trim($_GET['sex']) : '';
+if( $sex =='female' ){
+	$strategy = new Core\FemaleUserStrategy();
+} elseif( $sex == 'vip' ){
+	$strategy = new Core\vipUserStrategy();
+} else {
+	$strategy = new Core\MaleUserStrategy();
+}
+$data->setStrategy($strategy);
+$data->index();
+```
+
+#### 使用策略模式可以实现Ioc,依赖导致、控制反转
+
+在写Page类的时候，并不需要去定义好所依赖的类，里面没有它的代码，最终在代码执行过程中，才将关系进行绑定，这种设计模式在我们面向对象的设计之中经常要用到这个，因为面向对象很重要的一个思路就是**解耦**。
+
+如果两个类是互相依赖的关系，那么它们之间的关系就是**紧耦合**设计，使用策略模式进行一个依赖倒置之后，我们就可以很方便去替换其中一个类。
