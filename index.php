@@ -4,9 +4,18 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-// $db = Core\Database::getInstance();
-$db = \Core\Factory::createDatabase();
+$config = array (
+	'default' => array (
+		'hostname' => '127.0.0.1',
+		'database' => 'mycms',
+		'username' => 'root',
+		'password' => 'pyl',
+	),
+);
 
-$db2 = Core\Register::get('db1');
-var_dump($db);
-var_dump($db2);
+$db = new Core\Database\MySqli();
+$link = $db->connect($config['default']);
+$mysqli_result = $db->query('show databases');
+$result = mysqli_fetch_array($mysqli_result, MYSQLI_ASSOC);
+print_r($result);
+$db->close();
