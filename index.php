@@ -4,5 +4,9 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-// $db = new \Core\Database();
+// $db = Core\Database::getInstance();
 $db = \Core\Factory::createDatabase();
+
+$db2 = Core\Register::get('db1');
+var_dump($db);
+var_dump($db2);
