@@ -11,7 +11,7 @@ class User
 
 	protected $db;
 
-	public function __construct()
+	public function __construct($id)
 	{
 	 	$this->db = new Mysqli();
 		$config = array (
@@ -23,7 +23,8 @@ class User
 			),
 		);
 	 	$this->db->connect($config['default']);
-	 	$query = $this->db->query('select * from user limit 1');
+	 	$sql = 'select * from user where id='.$id.' limit 1';
+	 	$query = $this->db->query($sql);
 	 	$result = mysqli_fetch_array($query);
 	 	$this->id = $result['id'];
 	 	$this->name = $result['name'];
@@ -33,7 +34,7 @@ class User
 
 	public function __destruct()
 	{
-		$sql = 'update user set id='.$this->id.',name=\''.$this->name.'\',mobile='.$this->mobile.',regtime='.$this->regtime.' limit 1';
+		$sql = 'update user set name=\''.$this->name.'\',mobile='.$this->mobile.',regtime='.$this->regtime.' where id='.$this->id.' limit 1';
 		$this->db->query($sql);
 			
 	}

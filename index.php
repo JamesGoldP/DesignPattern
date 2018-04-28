@@ -4,9 +4,9 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-$user = new Core\User(1);
+$user = new Core\User(9);
 // var_dump($user->id.$user->name.$user->mobile.$user->regtime);
-$user->id = 20;
-$user->name = 'Nezumi';
+
+$user->name = 'Nezumi4';
 $user->mobile = '18922322234';
 $user->regtime = time();
