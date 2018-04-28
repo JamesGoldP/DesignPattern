@@ -10,4 +10,16 @@ class Factory{
     	return $db;			
     }
 
+    public static function getUser($id)
+    {
+    	$key = 'user_'.$id;
+    	$user = Register::get($key);
+    	if( !$user ){
+    		$user = new user($id);
+    		Register::set($key, $user);
+    	}
+        return $user;	
+    }
+
+
 }
