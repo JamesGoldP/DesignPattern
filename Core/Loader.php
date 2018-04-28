@@ -5,7 +5,7 @@ class Loader{
 
 	public static function _autoload($class)
 	{
-		require_once BASEDIR.'/'.str_replace('\\', '/', $class).'.php';
+		require_once BASEDIR.'/'.str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
 	}
 
 }

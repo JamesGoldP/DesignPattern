@@ -12,12 +12,10 @@ class Database{
 
 	public static function getInstance()
 	{
-		if( self::$db ){
-			return  self::$db;
-		} else {
+		if( !self::$db ){
 			self::$db = new self();
-			return self::$db;
-		}
+		} 
+		return self::$db;
 
 	}
 
