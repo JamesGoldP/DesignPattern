@@ -22,6 +22,7 @@ class Canvas
 
     function draw()
     {
+        $this->beforeDraw();
         foreach($this->data as $line)
         {
             foreach($line as $char)
@@ -30,6 +31,28 @@ class Canvas
             }
             echo "<br />\n";
         }
+        $this->afterDraw();
+    }
+
+    function addDecorator($decorator)
+    {
+        $this->decorators[] = $decorator;
+    }
+
+    function beforeDraw()
+    {
+        foreach ($this->decorators as $key => $value) {
+            $value->beforeDraw(); 
+        }
+    }
+
+    function afterDraw()
+    {
+        $this->decorators = array_reverse($this->decorators);
+        foreach ($this->decorators as $key => $value) {
+             $value->afterDraw(); 
+        }
+
     }
 
     function rect($a1, $a2, $b1, $b2)
