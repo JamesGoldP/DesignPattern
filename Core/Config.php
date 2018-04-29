@@ -35,7 +35,7 @@ class Config implements \ArrayAccess
 				$this->configs[$offset] = $config;
 			}
 		}
-		return $this->configs;
+		return $this->configs[$offset];
 	}
 
 	/**
