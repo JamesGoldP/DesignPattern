@@ -4,7 +4,6 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-$users = new Core\AllUser();
-foreach ($users as $key => $value) {
-	$value->mobile = rand(1,1000);
-}
+$proxy = new Core\UserProxy();
+$proxy->setUsername('8', 'James');
+$proxy->getUsername('8');

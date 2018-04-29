@@ -28,7 +28,6 @@ class User
 		$sql = 'update user set name=\''.$this->name.'\',mobile='.$this->mobile.',regtime='.$this->regtime.' where id='.$this->id.' limit 1';
 		// echo $sql;
 		// $this->db->query($sql);
-			
 	}
 
 }
