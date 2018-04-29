@@ -28,8 +28,7 @@ class Config implements \ArrayAccess
 	public function offsetGet ( $offset )
 	{
 		if(empty($this->configs[$offset])){
-			$file_path = $this->path.DIRECTORY_SEPARATOR;
-			$file = $file_path.$offset.'.php';
+			$file = $this->path.DIRECTORY_SEPARATOR.$offset.'.php';
 			if( file_exists($file) ){
 				$config = require_once($file);
 				$this->configs[$offset] = $config;
