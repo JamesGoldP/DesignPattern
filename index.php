@@ -4,5 +4,6 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-$config = Core\Application::getInstance()->config['database']['master'];
-// print_r($config);
+$db = Core\Factory::getDatabase();
+// var_dump($db);
+var_dump(Core\Register::get('database_master'));

@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use Core\Database\Mysqli;
+
 class Factory{
 
     public static function createDatabase()
@@ -20,6 +22,25 @@ class Factory{
     	}
         return $user;	
     }
+
+    public static function getDatabase( $id = 'master' )
+    {
+        $key = 'database_'.$id;
+        if( $id == 'master' ){
+            $db_config = Application::getInstance()->config['database']['master'];
+        } else {
+            $db_configs  = Application::getInstance()->config['database']['slave'];
+            $db_config = $db_configs[array_rand($db_configs)];
+        }
+        $db = Register::get($key);
+        if( !$db ){
+            $db = new Mysqli();
+            $db->connect($db_config);
+            Register::set($key, $db);
+        }
+        return $db;
+    }
+
 
 
 }
