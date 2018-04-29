@@ -13,16 +13,7 @@ class User
 
 	public function __construct($id)
 	{
-	 	$this->db = new Mysqli();
-		$config = array (
-			'default' => array (
-				'hostname' => 'localhost',
-				'database' => 'temp',
-				'username' => 'root',
-				'password' => 'pyl',
-			),
-		);
-	 	$this->db->connect($config['default']);
+	 	$this->db = Factory::getDatabase();
 	 	$sql = 'select * from user where id='.$id.' limit 1';
 	 	$query = $this->db->query($sql);
 	 	$result = mysqli_fetch_array($query);
@@ -35,8 +26,8 @@ class User
 	public function __destruct()
 	{
 		$sql = 'update user set name=\''.$this->name.'\',mobile='.$this->mobile.',regtime='.$this->regtime.' where id='.$this->id.' limit 1';
-		echo $sql;
-		$this->db->query($sql);
+		// echo $sql;
+		// $this->db->query($sql);
 			
 	}
 

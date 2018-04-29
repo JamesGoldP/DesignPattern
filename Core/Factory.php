@@ -34,7 +34,7 @@ class Factory{
         }
         $db = Register::get($key);
         if( !$db ){
-            $db = new Mysqli();
+            $db = new MySqli();
             $db->connect($db_config);
             Register::set($key, $db);
         }

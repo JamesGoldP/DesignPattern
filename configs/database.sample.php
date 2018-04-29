@@ -2,7 +2,7 @@
 $array =  array (
 	'master' => array (
 		'hostname' => 'localhost',
-		'database' => 'mycms',
+		'database' => 'temp',
 		'username' => 'root',
 		'password' => 'pyl',
 		'tablepre' => 'cms_',
@@ -16,7 +16,7 @@ $array =  array (
 	'slave' => array(
 		'slave1' => array (
 			'hostname' => 'localhost',
-			'database' => 'mycms',
+			'database' => 'temp',
 			'username' => 'root',
 			'password' => 'pyl',
 			'tablepre' => 'cms_',
@@ -29,7 +29,7 @@ $array =  array (
 		),
 		'slave2' => array (
 			'hostname' => 'localhost',
-			'database' => 'mycms',
+			'database' => 'temp',
 			'username' => 'root',
 			'password' => 'pyl',
 			'tablepre' => 'cms_',

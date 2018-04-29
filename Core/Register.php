@@ -18,9 +18,13 @@ class Register{
 	 *  获取全局树的类
 	 *
 	 */
-	public static function get($alias)
+	public static function get($key)
 	{
-		return self::$objects[$alias];
+		if (!isset(self::$objects[$key]))
+        {
+            return false;
+        }
+		return self::$objects[$key];
 	}	
 
 
