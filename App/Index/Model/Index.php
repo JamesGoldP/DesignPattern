@@ -5,7 +5,7 @@ class Index
 {
 	public function __construct()
 	{
-		echo 'The index model';
+		echo 'Loaded model';
 	}	
 
 }

@@ -2,8 +2,9 @@
 namespace App\Index\Controller;
 
 use Core\Factory;
+use Core\Template;
 
-class Index
+class Index extends Template
 {
 	public function __construct()
 	{
@@ -11,6 +12,8 @@ class Index
 
 	public function init()
 	{
-	 	$model = Factory::getModel('index');	
+	 	$model = Factory::getModel('index');
+	 	$this->assign('data', 'Hello World');
+	 	$this->display('index');	
 	}		
 }
