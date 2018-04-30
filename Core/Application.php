@@ -30,8 +30,11 @@ class Application
     		$url = trim($url, '/'); //去掉左右两边的/
     		$url_array = explode('/', $url);
     		$module = !empty($url_array[0])  ? ucwords(trim($url_array[0])) : $route_conf['module'];
+            define('ROUTE_M', $module);
     		$controller = !empty($url_array[1])  ? ucwords(trim($url_array[1])) : $route_conf['controller'];
+            define('ROUTE_C', $module);
     		$action = !empty($url_array[2])  ? strtolower(trim($url_array[2])) : $route_conf['action'];
+            define('ROUTE_A', $module);
 
     		for ($i=0; $i < 3; $i++) { 
     			if( isset($url_array[$i]) ){

@@ -41,6 +41,18 @@ class Factory{
         return $db;
     }
 
+    static function getModel($name)
+    {
+       $key = 'app_model_'.$name;
+       $model = Register::get($key);
+       if(!$model){
+            $class = '\App\\'.ROUTE_M.'\\'.'Model\\'.$name;
+            $model = new $class();
+            Register::set($key, $model);
+       }
+       return $model;
+       
+    }
 
 
 }
