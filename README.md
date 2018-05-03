@@ -214,3 +214,7 @@ $data->index();
 ## 观察者模式在MVC中的应用
 
 /index/user/add
+
+## 代理模式在MVC中的应用
+
+/index/user/show

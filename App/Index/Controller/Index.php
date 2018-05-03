@@ -15,5 +15,4 @@ class Index extends Controller
 	 	return array('code'=>1,'result'=>'success', 'data'=>array('content'=>'Hello World'));	
 	}
 
-
 }

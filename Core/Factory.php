@@ -2,8 +2,11 @@
 namespace Core;
 
 use Core\Database\Mysqli;
+use Core\Database\Proxy;
 
 class Factory{
+
+    static $proxy = null;
 
     public static function createDatabase()
     {
@@ -25,6 +28,13 @@ class Factory{
 
     public static function getDatabase( $id = 'master' )
     {
+        if( $id == 'proxy' ){
+            if( !self::$proxy ){
+                self::$proxy = new Proxy; 
+            } 
+            return self::$proxy;
+        }
+
         $key = 'database_'.$id;
         if( $id == 'master' ){
             $db_config = Application::getInstance()->config['database']['master'];
