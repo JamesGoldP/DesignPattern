@@ -14,7 +14,7 @@ class Controller
 	public function display($file = '')
 	{
 		
-		$path = BASEDIR.'/App/'.ROUTE_M.'/View/';
+		$path = BASEDIR.'/App/'.ROUTE_M.'/View/'.ROUTE_C.'/';
 		$path = str_replace('/', DIRECTORY_SEPARATOR, $path);
 		if( empty($file) ){	
 			$file = ROUTE_A;

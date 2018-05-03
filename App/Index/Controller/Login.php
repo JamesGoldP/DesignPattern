@@ -5,7 +5,7 @@ use Core\Controller;
 use Core\Template;
 
 
-class Index extends Controller
+class Login extends Controller
 {
 	public function __construct()
 	{
@@ -16,7 +16,6 @@ class Index extends Controller
 	 	// $model = Factory::getModel('index');
 	 	// $this->assign('data', 'Hello World');
 	 	// $this->display('index');
-	 	return array('code'=>1,'result'=>'success', 'data'=>array('content'=>'Hello World'));	
-	}	
-
+	 	// return array('code'=>1,'result'=>'success', 'data'=>array('content'=>'Hello World'));	
+	}		
 }
