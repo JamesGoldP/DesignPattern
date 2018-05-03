@@ -1,11 +1,11 @@
 <?php
 namespace App\Index\Model;
 
-class Index
+class Index extends Template
 {
 	public function __construct()
 	{
-		echo 'Loaded model';
+		
 	}	
 
 }

@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-class Template
+class Controller
 {
 
 	protected $assign = array(); //模板文件所所分配的数组
