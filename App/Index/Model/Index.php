@@ -1,7 +1,7 @@
 <?php
 namespace App\Index\Model;
 
-class Index extends Template
+class Index
 {
 	public function __construct()
 	{

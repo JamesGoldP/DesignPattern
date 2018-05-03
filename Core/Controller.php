@@ -6,6 +6,10 @@ class Controller
 
 	protected $assign = array(); //模板文件所所分配的数组
 
+	public function __construct()
+	{
+	}
+
 	public function assign($key, $value)
 	{
 		$this->assign[$key] = $value;	

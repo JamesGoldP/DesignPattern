@@ -4,7 +4,7 @@ $array = array(
 		'decorators' => array(
 				'App\Index\Decorator\Template',
 				'App\Index\Decorator\Json',
-				'App\Index\Decorator\Login',
+				// 'App\Index\Decorator\Login',
 			),
 		),
 	'login' => array(

@@ -2,7 +2,6 @@
 namespace App\Index\Controller;
 
 use Core\Controller;
-use Core\Template;
 
 
 class Login extends Controller

@@ -53,7 +53,7 @@ class Application
     			}
     		}
     		$class = '\App\\'.$module.'\\Controller\\'.$controller;
-	    	$object = new $class();
+	    	$object = new $class($module, $controller, $action);
 
             $decorators = array();
             if( isset($this->config['controller'][$controller_low]['decorators']) ){
