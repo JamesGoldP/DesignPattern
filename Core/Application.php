@@ -25,33 +25,36 @@ class Application
     public function dispatch()
     {
     	$url = $_SERVER['PATH_INFO'];
+        //获取默认route配置
     	$route_conf = $this->config['route']['default'];
-    	if( isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI']!='/' ){
+    	if( isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO']!='/' ){
     		$url = trim($url, '/'); //去掉左右两边的/
     		$url_array = explode('/', $url);
-    		$module = !empty($url_array[0])  ? ucwords(trim($url_array[0])) : $route_conf['module'];
+
+            //获取模块
+    		$module = !empty($url_array[0])  ? ucwords(array_shift($url_array)) : $route_conf['module'];
             define('ROUTE_M', $module);
-    		$controller = !empty($url_array[1])  ? ucwords(trim($url_array[1])) : $route_conf['controller'];
+
+            //获取控制器
+    		$controller = !empty($url_array[0])  ? ucwords(array_shift($url_array)) : $route_conf['controller'];
             define('ROUTE_C', $controller);
-    		$action = !empty($url_array[2])  ? strtolower(trim($url_array[2])) : $route_conf['action'];
+
+            //获取方法
+    		$action = !empty($url_array[0])  ? strtolower(array_shift($url_array)) : $route_conf['action'];
             define('ROUTE_A', $action);
 
             $controller_low = strtolower($controller);
 
-    		for ($i=0; $i < 3; $i++) { 
-    			if( isset($url_array[$i]) ){
-	    			unset($url_array[$i]);
-	    		}
-    		}
 
     		//处理后面的参数
     		if( !empty($url_array) ){
-    			for($i=3; $i<count($url_array)+3; $i+=2){
+    			for($i=0; $i<count($url_array); $i+=2){
     				if(isset($url_array[$i+1])){
     					$_GET[$url_array[$i]] = $url_array[$i+1];
     				}
     			}
     		}
+
     		$class = '\App\\'.$module.'\\Controller\\'.$controller;
 	    	$object = new $class($module, $controller, $action);
 
