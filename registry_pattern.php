@@ -4,9 +4,8 @@ define('BASEDIR', __DIR__);
 include_once BASEDIR.'/Core/Loader.php';
 spl_autoload_register('\\Core\\Loader::_autoload');
 
-// $db = Core\Database::getInstance();
-$db = \Core\Factory::createDatabase();
-
+# 对于很多地方的new，可以挂在全局树上
+$db1 = \Core\Factory::createDatabase();
 $db2 = Core\Register::get('db1');
 var_dump($db);
 var_dump($db2);
