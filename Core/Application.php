@@ -59,7 +59,7 @@ class Application
 	    	$object = new $class($module, $controller, $action);
 
             $decorators = array();
-            if( isset($this->config['controller'][$controller_low]['decorators']) ){
+            if( $this->config['controller'][$controller_low]['decorators'] ){
                 $conf_decorator = $this->config['controller'][$controller_low]['decorators'];
                 foreach($conf_decorator as $key =>$value){
                     $decorators[] = new $value;   
